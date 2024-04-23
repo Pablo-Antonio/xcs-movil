@@ -1,0 +1,101 @@
+<app-header></app-header>
+
+<ion-content fullscreen="true">
+
+  <div style="margin: 10px 0px; text-align: center; padding-top: 30px;">
+    <app-page-title [title]="title"></app-page-title>
+  </div>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>SOPORTE</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Esta aplicación móvil ha sido diseñada y desarrollada por Addinteli. En caso de que tengas alguna duda sobre el funcionamiento o alguna observación para la mejora del servicio, quedamos atentos a tus comentarios.
+      <br>
+      Para más información visita <b style="text-decoration: underline;" (click)="openAdd()">addinteli.com.mx</b>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Deja un comentario</ion-card-title>
+    </ion-card-header>
+    <form [formGroup]="commentForm" (submit)="submit()">
+
+      <p position="floating">Email del remitente</p>
+      <ion-item>
+        <!--<ion-label position="floating">Email del remitente</ion-label>-->
+        <ion-input formControlName="email" maxlength="128"></ion-input>
+      </ion-item>
+
+      <p position="floating">Asunto</p>
+      <ion-item>
+        <!--<ion-label position="floating">Asunto</ion-label>-->
+        <ion-input formControlName="subject" maxlength="32"></ion-input>
+      </ion-item>
+
+      <p position="stacked">Máximo 250 caracteres</p>
+      <ion-item>
+        <!--<ion-label position="stacked">Máximo 250 caracteres</ion-label>-->
+        <ion-textarea formControlName="comment" maxlength="250"></ion-textarea>
+      </ion-item>
+
+      <ion-button type="submit" expand="block" fill="clear" [disabled]="!commentForm.valid">Enviar</ion-button>
+    </form>
+  </ion-card>
+</ion-content>
+
+<app-footer></app-footer>
+
+<style>
+  ion-button {
+    --background: var(--ion-color-fourth-xcs);
+    --border-radius: 5px;
+    --color: white;
+    --height: 50px;
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  ion-card {
+    background-color: transparent;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  ion-item {
+    --border-radius: 5px;
+    --height: 50px;
+  }
+
+  ion-card-title {
+    font-size: medium;
+    font-weight: 600;
+    color: black;
+    margin-left: -10px;
+  }
+
+  ion-card-content {
+    color: black;
+    font-weight: 400;
+    margin-left: -10px;
+    text-align: justify;
+    font-size: small;
+    padding-top: 0;
+  }
+
+  span {
+    color: white;
+    font-weight: 400;
+  }
+
+  p {
+    color: black;
+    font-weight: 400;
+    font-size: medium;
+    margin: 5px 0;
+  }
+
+</style>

@@ -1,0 +1,107 @@
+<app-header [bkButton]="false"></app-header>
+
+<ion-content fullscreen="true">
+
+  <div class="text_end">
+    <div class="row">
+      <div class="col-6 social-media">
+        <!--<img src="../../../assets/img/facebook.png" (click)="openFB()"/> &nbsp;-->
+        <!--<img src="../../../assets/img/instagram.png" (click)="openIG()"/>-->
+      </div>
+      <br />
+      <!--<a (click)="openWips()" class="title-color">WISP.MX</a>-->
+      <!--<a [routerLink]="['/notice-privacy']">Aviso de privacidad</a>
+      <a [routerLink]="['/terms-conditions']">Términos y condiciones</a>-->
+    </div>
+    <!--<p >Powered by Addinteli 2024</p>-->
+  </div>
+
+    <div style="margin: 10px 0px; text-align: center; padding-top: 100px; padding-bottom: 80px;">
+        <app-page-title [title]="title" ></app-page-title>
+    </div>
+
+    <ion-button (click)="openRecarga()" expand="block" color="white">
+      <div class="text_left">
+        <ion-icon slot="start" name="reload-circle"></ion-icon>
+        Recargar Plan
+      </div>
+    </ion-button>
+
+    <ion-button *ngFor="let page of pages" [routerLink]="page.redirectTo" expand="block" color="white">
+      <div class="text_left" >
+        <ion-icon slot="start" [name]="page.icon"></ion-icon>
+        {{page.name | titlecase}}
+      </div>
+    </ion-button>
+
+</ion-content>
+
+<app-footer></app-footer>
+
+
+<style>
+
+  ion-button {
+    margin: 0;
+    padding: 15px;
+    height: auto;
+    color: #000;
+    text-shadow: 2px 2px var(--ion-color-primary-xcs);
+    font-size: 13px;
+    --box-shadow: none !important;
+  }
+
+  h1 {
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  .text_left {
+    width: 80%;
+    padding: 8px;
+    margin: 0;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    text-align: left;
+    border-bottom: 1px solid #FF0054;
+
+    text-shadow: 2px 2px var(--ion-color-primary-xcs);
+
+  }
+
+  .text_left ion-icon {
+    margin-right: 8px;
+    font-size: 20px;
+    color: var(--ion-color-fourth-xcs);
+  }
+
+  .text_end {
+    width: 100%;
+    position: absolute;
+    top: 83%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-weight: 300;
+    font-size: small;
+  }
+
+  .text_end p {
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: small;
+  }
+
+  .row a {
+    text-decoration: none;
+    font-size: small;
+    margin-right: 10px;
+    font-weight: 400;
+  }
+
+  .row img {
+    margin-right: 10px;
+  }
+</style>

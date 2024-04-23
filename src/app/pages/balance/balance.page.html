@@ -1,0 +1,171 @@
+<app-header></app-header>
+
+<ion-content fullscreen="true">
+  
+  <div style="margin: 10px 0px; text-align: center; padding-top: 30px;">
+    <app-page-title [title]="title"></app-page-title>
+  </div>
+
+  <ion-card>
+    <form [formGroup]="numberForm" (submit)="submit()">
+      <ion-item>
+        <ion-label position="floating">Número</ion-label>
+        <ion-input type="number" formControlName="phone_number" maxlength="32"></ion-input>
+      </ion-item>
+      <ion-button type="submit" expand="block" fill="clear" [disabled]="!numberForm.valid">Enviar</ion-button>
+    </form>
+  </ion-card>
+  
+  <ion-card *ngIf="data">
+    <ion-card-header class="ion-no-padding ion-padding-horizontal ion-padding-top">
+      <ion-card-title>Consumo de: <ion-label [innerHTML]="data.phone_number" color="tertiary"></ion-label></ion-card-title>
+    </ion-card-header>
+    <ion-list>
+      <ion-item id="days-left">
+        <ion-icon slot="start" src="../../../assets/icon/calendario.svg" class="color4"></ion-icon>
+        Vigencia
+        <div slot="end">
+          {{formatDate(data.effective_date) | date: 'shortDate'}} - {{formatDate(data.expire_date) | date: 'shortDate'}}
+        </div>
+      </ion-item>
+      <ion-popover trigger="days-left" side="bottom" size="cover">
+        <ng-template>
+          <ion-item>
+            <ion-label>Te quedan {{data.daysLeft}} días de beneficios</ion-label>
+          </ion-item>
+        </ng-template>
+      </ion-popover>
+
+      <ion-item class="ion-margin-top">
+        <ion-icon slot="start" src="../../../assets/icon/datos.svg" class="color4"></ion-icon>
+        Datos
+        <span slot="end">{{data.data.unused / 1000 | number:'.0-2'}} / {{data.data.total / 1000 | number:'.0-2'}} GB</span>
+      </ion-item>      
+      <ion-progress-bar class="color4" [value]="1 - data.percentData"></ion-progress-bar>
+      <ng-container *ngIf="data.data_thr.total">
+        <ion-item>
+          <ion-icon slot="start" src="../../../assets/icon/puj.svg" class="color4"></ion-icon>
+          Uso Justo
+          <span slot="end">{{data.data_thr.unused / 1000 | number:'.0-2'}} / {{data.data_thr.total / 1000 | number:'.0-2'}} GB</span>
+        </ion-item>
+        <ion-progress-bar class="color4" [value]="1 - data.percentDataThr"></ion-progress-bar>
+      </ng-container>
+      
+      <ng-container *ngIf="data.data_free.total">
+        <ion-item>
+          <ion-icon slot="start" src="../../../assets/icon/promo.svg" class="color4"></ion-icon>
+          Promociones
+          <span slot="end">{{data.data_free.unused / 1000 | number:'.0-2'}} / {{data.data_free.total / 1000 | number:'.0-2'}} GB</span>
+        </ion-item>
+        <ion-progress-bar class="color4" [value]="1 - data.percentDataFree"></ion-progress-bar>
+      </ng-container>
+      
+      <ion-item class="ion-margin-top">
+        <ion-icon slot="start" src="../../../assets/icon/minutos.svg" color="secondary"></ion-icon>
+        Minutos
+        <span slot="end">{{data.min.unused}} de {{data.min.total}} Min</span>
+      </ion-item>
+      <ion-progress-bar color="secondary" [value]="1 - data.percentMin"></ion-progress-bar>
+      <ion-item>
+        <ion-icon slot="start" src="../../../assets/icon/mensajes.svg" color="secondary"></ion-icon>
+        Mensajes
+        <span slot="end">{{data.sms.unused}} de {{data.sms.total}} SMS</span>
+      </ion-item>
+      <ion-progress-bar color="secondary" [value]="1 - data.percentSms"></ion-progress-bar>
+    </ion-list>
+    <ng-container *ngIf="selfConsul == data.phone_number; else self">
+      <ion-button expand="block" fill="clear" (click)="delePNumber()"color="danger">Remover número</ion-button>
+    </ng-container>
+    <ng-template #self>
+      <ion-button expand="block" fill="clear" (click)="savePNumber(data.phone_number)">Guardar número</ion-button>
+    </ng-template>
+  </ion-card>
+</ion-content>
+<app-footer></app-footer>
+
+<style>
+
+  ion-button {
+    --background: var(--ion-color-fourth-xcs) !important;
+    --border-radius: 5px;
+    --color: #000;
+    --height: 50px;
+    margin-top: 10px;
+    margin-left: -10px;
+    width: 110%;
+  }
+
+  ion-button[disabled] {
+    opacity: 1 !important;
+  }
+
+  ion-card {
+    background-color: transparent;
+  }
+
+  ion-card-header {
+    padding-top: 0;
+  }
+
+  ion-item {
+    --border-radius: 5px;
+    --height: 50px;
+    --background: transparent;
+    font-size: 17px;
+    color: #000;
+    /*margin: -10px;*/
+    padding: 5;
+  }
+
+  ion-card-title,ion-title {
+    font-size: medium;
+    color: #000;
+    margin-left: -10px;
+  }
+
+  .title_phone{
+    font-size: 18px;
+    color: #000;
+  }
+
+  .item_before {
+    background-color: #fff;
+    margin-left: -10px;
+    width: 110%;
+    color: #000;
+    font-size: medium;
+  }
+
+  .title_after {
+    color: #fff;
+    font-size: medium;
+  }
+
+  ion-label {
+    font-size: medium;
+    color: white;
+  }
+
+  ion-list {
+    background-color: transparent;
+  }
+
+  h2 {
+    color: #fff;
+    font-size: medium;
+    margin-left: 33.33%;
+  }
+
+  hr {
+    border-bottom: 1px solid #fff;
+    width: 95%;
+    margin: 0 auto;
+  }
+
+  #pop_left_days {
+    color: #000;
+    width: 100%;
+    text-align: center;
+  }
+
+</style>

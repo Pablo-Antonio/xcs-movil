@@ -1,0 +1,8 @@
+{
+  "/addmg/*": {
+    "target": "https://addinteli-manager.com.mx/api/versions/usr_v1",
+    "changeOrigin": true,
+    "secure": false,
+    "pathRewrite": {"^/addmg" : ""}
+  }
+}

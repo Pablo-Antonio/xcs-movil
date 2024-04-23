@@ -1,0 +1,59 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+ion-content {
+    --background: url(../src/assets/img/fondo.jpg) 0 0/100% 100% no-repeat;
+}
+
+ion-footer ion-title{
+    color:darkgrey;
+    font-size: 16px;
+}
+
+.color1{
+    color:var(--ion-color-primary-xcs);
+}
+
+.color2{
+    color:var(--ion-color-secondary-xcs);
+}
+
+.color3{
+    color:var(--ion-color-third-xcs);
+}
+
+.color4{
+    text-shadow: 2px 2px #fff;
+    color:#000;
+}
+
+ion-progress-bar {
+    --background: green;
+    --buffer-background: red;
+    --progress-background: black;
+}
+

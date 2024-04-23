@@ -1,0 +1,9 @@
+{
+	"appId": "io.ionic.xcs",
+	"appName": "XCS Movil",
+	"webDir": "www",
+	"bundledWebRuntime": false,
+	"server": {
+		"cleartext": true
+	}
+}
